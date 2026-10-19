@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#233e36">
+<meta name="description" content="강의, 미팅, 일상을 한곳에. 나의 하루와 한 주를 관리하는 개인 일정 앱."><title>내 업무 일정관리</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">▦</span>내 업무 일정관리</a><span class="header-label">MY DAILY WORKSPACE</span><time id="today-date"></time></header>
+<main>
+<section class="welcome"><div><p class="eyebrow">작은 기록이 만드는 여유로운 하루</p><h1>오늘의 일에, 집중하세요.</h1><p class="subtext">강의와 미팅, 나를 위한 시간까지 한곳에서 관리하세요.</p></div><button id="new-focus" class="primary">＋ 일정 입력</button></section>
+<section class="summary" aria-label="일정 요약"><div><span>오늘의 일정</span><p><strong id="count-today">0</strong><small>개</small></p><span class="stat-note">오늘 해야 할 일을 확인하세요</span></div><div><span>이번 주 일정</span><p><strong id="count-week">0</strong><small>개</small></p><span class="stat-note">월요일부터 일요일까지</span></div><div><span>이번 주 완료</span><p><strong id="count-done">0</strong><small>개</small></p><span class="stat-note" id="done-note">하나씩, 차근차근 해내고 있어요</span></div></section>
+<div id="storage-warning" class="warning" role="alert" hidden></div>
+<div class="workspace">
+<section class="form-panel" aria-labelledby="form-heading"><div class="section-eyebrow">NEW SCHEDULE</div><h2 id="form-heading">새 일정 입력</h2><p class="panel-intro">기억할 일을 가볍게 남겨보세요.</p>
+<form id="schedule-form"><div class="field"><label for="title">일정 이름 <span>*</span></label><input id="title" required maxlength="150" placeholder="예: AI 마케팅 자동화 강의"></div>
+<div class="field"><label for="category">일정 분류 <span>*</span></label><select id="category" required><option>강의 일정</option><option>미팅</option><option>일상</option></select></div>
+<div class="field"><label for="date">날짜 <span>*</span></label><input id="date" type="date" min="1900-01-01" max="9999-12-31" required><small id="date-weekday" class="input-hint"></small></div>
+<div class="time-pair"><div class="field"><label for="start">시작 시간 <span>*</span></label><input id="start" type="time" required value="09:00"></div><div class="field"><label for="end">종료 시간 <span>*</span></label><input id="end" type="time" required value="10:00"></div></div>
+<div class="field"><label for="memo">메모 <small>선택</small></label><textarea id="memo" maxlength="3000" rows="3" placeholder="준비물이나 기억할 내용을 적어주세요."></textarea></div>
+<button class="primary save" id="save" type="submit">＋ 일정 추가하기</button><button class="cancel" id="cancel-edit" type="button" hidden>수정 취소</button>
+</form><div class="form-foot"><span aria-hidden="true">◷</span> 일정은 이 브라우저에 자동 저장됩니다.</div></section>
+<section class="schedule-area" aria-labelledby="list-heading"><div class="list-head"><div><p class="section-eyebrow">MY SCHEDULE</p><h2 id="list-heading">나의 일정 <span id="list-count"></span></h2></div><button class="text-button" id="go-today">오늘로 이동 ↗</button></div>
+<div class="tabs" role="tablist" aria-label="일정 보기"><button id="tab-today" role="tab" data-view="today" aria-selected="false" aria-controls="schedule-list" tabindex="-1">오늘</button><button id="tab-week" role="tab" data-view="week" aria-selected="true" aria-controls="schedule-list">이번 주</button><button id="tab-past" role="tab" data-view="past" aria-selected="false" aria-controls="schedule-list" tabindex="-1">지난 일정</button><button id="tab-all" role="tab" data-view="all" aria-selected="false" aria-controls="schedule-list" tabindex="-1">전체 일정</button></div>
+<div class="view-heading"><p id="view-period"></p><span id="view-caption"></span></div>
+<div class="filters" role="group" aria-label="분류 필터"><button data-filter="전체" aria-pressed="true">전체</button><button data-filter="강의 일정" aria-pressed="false"><i class="dot lecture"></i>강의 일정</button><button data-filter="미팅" aria-pressed="false"><i class="dot meeting"></i>미팅</button><button data-filter="일상" aria-pressed="false"><i class="dot daily"></i>일상</button></div>
+<div id="schedule-list" role="tabpanel" aria-labelledby="tab-week"></div>
+<div class="examples" id="examples" hidden><div><strong>이번 달의 계획, 이렇게 시작해 보세요.</strong><p>강의 · 전시회 · 등산 예시 3개를 추가할 수 있어요.</p></div><button id="add-examples" class="outline-button">예시 일정 추가</button></div>
+</section></div>
+<footer><span>내 업무 일정관리</span><p>나의 일을 정리하고, 나의 시간을 아끼세요.</p><small>한국 시간 기준 · 이 기기와 브라우저에 저장</small></footer>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="delete-dialog" aria-labelledby="delete-heading"><h2 id="delete-heading">일정을 삭제할까요?</h2><p id="delete-description"></p><div class="dialog-actions"><button id="delete-cancel" class="outline-button">취소</button><button id="delete-confirm" class="danger-button">삭제하기</button></div></dialog>
+<script src="app.js"></script>
+</body></html>
